@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,28 +11,159 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Malgun Gothic', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
-        
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        
+
+        /* 시작 화면 스타일 */
+        .start-screen {
+            text-align: center;
+            padding: 30px 20px;
+            display: block;
+        }
+
+        .start-screen.hidden {
+            display: none;
+        }
+
+        .start-title {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 40px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .character-selection {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .character-option {
+            font-size: 60px;
+            padding: 20px;
+            background: white;
+            border: 4px solid #cbd5e0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .character-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .character-option.selected {
+            border-color: #667eea;
+            background: #e6f2ff;
+            transform: scale(1.1);
+        }
+
+        .difficulty-selection {
+            margin-bottom: 40px;
+        }
+
+        .difficulty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .difficulty-option {
+            padding: 20px 15px;
+            font-size: 16px;
+            border: 4px solid #f39c12;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #f39c12;
+        }
+
+        .difficulty-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .difficulty-option.selected {
+            background: #f39c12;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .start-btn {
+            padding: 20px 60px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .start-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 게임 화면 스타일 */
+        .game-screen {
+            display: none;
+        }
+
+        .game-screen.active {
+            display: block;
+        }
+
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        
+
         .difficulty-selector {
             display: flex;
             gap: 8px;
@@ -39,10 +171,10 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-        
+
         .difficulty-btn {
-            padding: 10px 20px;
-            font-size: 15px;
+            padding: 8px 15px;
+            font-size: 13px;
             border: 3px solid #f39c12;
             background: white;
             border-radius: 10px;
@@ -51,57 +183,59 @@
             font-weight: bold;
             color: #f39c12;
         }
-        
+
         .difficulty-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        
+
         .difficulty-btn.active {
             background: #f39c12;
             color: white;
         }
-        
+
         h1 {
             color: #667eea;
-            font-size: 2.5em;
+            font-size: 2em;
             margin-bottom: 10px;
         }
-        
+
         .character-section {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            padding: 25px;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
             background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
             border-radius: 15px;
+            flex-wrap: wrap;
         }
-        
+
         .character {
-            font-size: 100px;
+            font-size: 80px;
             animation: bounce 2s infinite;
         }
-        
+
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
+
         .character-info {
             text-align: left;
         }
-        
+
         .level {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #d63031;
             margin-bottom: 10px;
         }
-        
+
         .exp-bar {
-            width: 300px;
+            width: 250px;
+            max-width: 100%;
             height: 30px;
             background: #dfe6e9;
             border-radius: 15px;
@@ -109,7 +243,7 @@
             position: relative;
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
         }
-        
+
         .exp-fill {
             height: 100%;
             background: linear-gradient(90deg, #00b894 0%, #00cec9 100%);
@@ -119,25 +253,26 @@
             justify-content: center;
             color: white;
             font-weight: bold;
+            font-size: 14px;
         }
-        
+
         .stats {
             margin-top: 10px;
-            font-size: 1.1em;
+            font-size: 1em;
             color: #2d3748;
         }
-        
+
         .problem-type-selector {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
-        
+
         .type-btn {
-            padding: 12px 24px;
-            font-size: 16px;
+            padding: 10px 18px;
+            font-size: 14px;
             border: 3px solid #667eea;
             background: white;
             border-radius: 10px;
@@ -146,38 +281,38 @@
             font-weight: bold;
             color: #667eea;
         }
-        
+
         .type-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        
+
         .type-btn.active {
             background: #667eea;
             color: white;
         }
-        
+
         .problem-container {
-            padding: 30px;
+            padding: 20px;
             background: #f7fafc;
             border-radius: 15px;
-            margin-bottom: 25px;
-            min-height: 400px;
+            margin-bottom: 20px;
+            min-height: 350px;
             border: 3px solid #e2e8f0;
             position: relative;
         }
-        
+
         .drawing-controls {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-        
+
         .drawing-btn {
-            padding: 8px 16px;
-            font-size: 14px;
+            padding: 6px 12px;
+            font-size: 12px;
             border: 2px solid #cbd5e0;
             background: white;
             border-radius: 8px;
@@ -185,71 +320,71 @@
             transition: all 0.2s;
             font-weight: bold;
         }
-        
+
         .drawing-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        
+
         .drawing-btn.active {
             background: #667eea;
             color: white;
             border-color: #667eea;
         }
-        
+
         .color-btn {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             border: 3px solid #cbd5e0;
             cursor: pointer;
             transition: all 0.2s;
         }
-        
+
         .color-btn:hover {
             transform: scale(1.1);
         }
-        
+
         .color-btn.active {
             border-color: #2d3748;
             border-width: 4px;
         }
-        
+
         .canvas-container {
             position: relative;
             width: 100%;
-            height: 350px;
+            height: 300px;
             background: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
         }
-        
+
         #problemCanvas {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 2;
+            z-index: 1;
             pointer-events: none;
         }
-        
+
         #drawingCanvas {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
+            z-index: 2;
             cursor: crosshair;
         }
-        
+
         .format-selector {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        
+
         .format-btn {
-            padding: 10px 20px;
+            padding: 8px 16px;
             margin: 0 5px;
-            font-size: 14px;
+            font-size: 13px;
             border: 2px solid #667eea;
             background: white;
             border-radius: 8px;
@@ -258,125 +393,46 @@
             font-weight: bold;
             color: #667eea;
         }
-        
+
         .format-btn:hover {
             transform: translateY(-1px);
         }
-        
+
         .format-btn.active {
             background: #667eea;
             color: white;
         }
-        
-        .problem-title {
-            font-size: 1.5em;
-            color: #2d3748;
-            margin-bottom: 25px;
-            font-weight: bold;
-            text-align: center;
-        }
-        
-        .inline-problem {
-            font-size: 2.5em;
-            text-align: center;
-            color: #2d3748;
-            margin: 30px 0;
-            font-weight: bold;
-        }
-        
-        .math-symbol {
-            display: inline-block;
-            margin: 0 10px;
-        }
-        
-        .vertical-problem {
-            display: inline-block;
-            text-align: right;
-            font-size: 2.5em;
-            font-family: 'Courier New', monospace;
-            line-height: 1.5;
-            margin: 20px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-        }
-        
-        .vertical-line {
-            border-bottom: 4px solid #2d3748;
-            margin: 8px 0;
-        }
-        
-        .division-problem {
-            display: inline-block;
-            font-size: 2.5em;
-            font-family: 'Courier New', monospace;
-            padding: 25px;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            position: relative;
-        }
-        
-        .division-container {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .dividend {
-            display: inline-block;
-            padding: 10px 30px 10px 15px;
-            border-left: 4px solid #2d3748;
-            border-top: 4px solid #2d3748;
-            margin-left: 60px;
-        }
-        
-        .divisor {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .word-problem {
-            font-size: 1.5em;
-            line-height: 2;
-            color: #2d3748;
-            padding: 25px;
-            background: white;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        
+
         .answer-section {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
-        
+
         .answer-display {
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: 1.8em;
+            margin-bottom: 15px;
             color: #2d3748;
-            min-height: 50px;
+            min-height: 40px;
             font-weight: bold;
         }
-        
+
         .number-pad {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            max-width: 700px;
-            margin: 0 auto 20px;
+            gap: 8px;
+            max-width: 600px;
+            margin: 0 auto 15px;
         }
-        
+
         .number-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             justify-content: center;
         }
-        
+
         .num-btn {
-            padding: 20px 30px;
-            font-size: 1.8em;
+            padding: 15px 20px;
+            font-size: 1.5em;
             background: white;
             border: 3px solid #cbd5e0;
             border-radius: 10px;
@@ -384,100 +440,103 @@
             transition: all 0.2s;
             font-weight: bold;
             color: #2d3748;
-            min-width: 80px;
+            min-width: 60px;
+            flex: 1;
+            max-width: 80px;
         }
-        
+
         .num-btn:hover {
             background: #edf2f7;
             transform: scale(1.05);
         }
-        
+
         .num-btn:active {
             transform: scale(0.95);
         }
-        
+
         .btn-clear {
             background: #fc8181;
             border-color: #fc8181;
             color: white;
         }
-        
+
         .btn-clear:hover {
             background: #f56565;
         }
-        
+
         .btn-submit {
-            padding: 15px 40px;
-            font-size: 1.3em;
+            padding: 12px 30px;
+            font-size: 1.2em;
             background: #48bb78;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            margin-left: 15px;
+            margin-left: 10px;
             transition: all 0.3s;
         }
-        
+
         .btn-submit:hover {
             background: #38a169;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
+
         .result-popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             z-index: 1000;
             text-align: center;
             transition: transform 0.3s;
+            max-width: 90%;
         }
-        
+
         .result-popup.show {
             transform: translate(-50%, -50%) scale(1);
         }
-        
+
         .result-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
+            font-size: 60px;
+            margin-bottom: 15px;
         }
-        
+
         .result-text {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        
+
         .result-correct {
             color: #48bb78;
         }
-        
+
         .result-incorrect {
             color: #f56565;
         }
-        
+
         .btn-next {
-            padding: 15px 40px;
-            font-size: 1.2em;
+            padding: 12px 30px;
+            font-size: 1.1em;
             background: #667eea;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            margin-top: 15px;
+            margin-top: 10px;
         }
-        
+
         .btn-next:hover {
             background: #5568d3;
         }
-        
+
         .overlay {
             position: fixed;
             top: 0;
@@ -488,110 +547,348 @@
             z-index: 999;
             display: none;
         }
-        
+
         .overlay.show {
             display: block;
         }
-        
-        .center-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+
+        .restart-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            font-size: 13px;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .restart-btn:hover {
+            background: #c53030;
+            transform: scale(1.05);
+        }
+
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .start-title {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .character-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+                max-width: 100%;
+            }
+
+            .character-option {
+                font-size: 40px;
+                padding: 10px;
+            }
+
+            .difficulty-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .difficulty-option {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+
+            .start-btn {
+                padding: 15px 40px;
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+            }
+
+            .character {
+                font-size: 60px;
+            }
+
+            .level {
+                font-size: 1.5em;
+            }
+
+            .exp-bar {
+                width: 200px;
+            }
+
+            .stats {
+                font-size: 0.9em;
+            }
+
+            .difficulty-btn {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .type-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .problem-container {
+                padding: 15px;
+                min-height: 300px;
+            }
+
+            .canvas-container {
+                height: 250px;
+            }
+
+            .drawing-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+
+            .color-btn {
+                width: 30px;
+                height: 30px;
+            }
+
+            .answer-display {
+                font-size: 1.5em;
+            }
+
+            .num-btn {
+                padding: 12px 15px;
+                font-size: 1.3em;
+                min-width: 50px;
+                max-width: 70px;
+            }
+
+            .btn-submit {
+                padding: 10px 25px;
+                font-size: 1em;
+            }
+
+            .result-icon {
+                font-size: 50px;
+            }
+
+            .result-text {
+                font-size: 1.5em;
+            }
+
+            .restart-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .start-title {
+                font-size: 1.5em;
+            }
+
+            .character-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+            }
+
+            .character-option {
+                font-size: 35px;
+                padding: 8px;
+            }
+
+            .difficulty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .character-section {
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .character {
+                font-size: 50px;
+            }
+
+            .exp-bar {
+                width: 180px;
+            }
+
+            .exp-fill {
+                font-size: 12px;
+            }
+
+            .canvas-container {
+                height: 220px;
+            }
+
+            .num-btn {
+                padding: 10px 12px;
+                font-size: 1.2em;
+                min-width: 45px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🎮 수학 레벨업 게임</h1>
-        </div>
-        
-        <div class="difficulty-selector">
-            <button class="difficulty-btn" onclick="selectDifficulty(1)">⭐ 1단계</button>
-            <button class="difficulty-btn" onclick="selectDifficulty(2)">⭐⭐ 2단계</button>
-            <button class="difficulty-btn active" onclick="selectDifficulty(3)">⭐⭐⭐ 3단계</button>
-            <button class="difficulty-btn" onclick="selectDifficulty(4)">⭐⭐⭐⭐ 4단계</button>
-            <button class="difficulty-btn" onclick="selectDifficulty(5)">⭐⭐⭐⭐⭐ 5단계</button>
-            <button class="difficulty-btn" onclick="selectDifficulty(6)">⭐⭐⭐⭐⭐⭐ 6단계</button>
-        </div>
-        
-        <div class="character-section">
-            <div class="character" id="character">🐱</div>
-            <div class="character-info">
-                <div class="level" id="level">Level 1</div>
-                <div class="exp-bar">
-                    <div class="exp-fill" id="expFill">0 / 10</div>
+        <!-- 시작 화면 -->
+        <div class="start-screen" id="startScreen">
+            <h1 class="start-title">🎮 수학 레벨업 게임</h1>
+
+            <div class="character-selection">
+                <div class="section-title">🐾 캐릭터를 선택하세요</div>
+                <div class="character-grid" id="characterGrid">
+                    <div class="character-option" data-char="🐱">🐱</div>
+                    <div class="character-option" data-char="🐶">🐶</div>
+                    <div class="character-option" data-char="🐼">🐼</div>
+                    <div class="character-option" data-char="🦁">🦁</div>
+                    <div class="character-option" data-char="🐯">🐯</div>
+                    <div class="character-option" data-char="🦊">🦊</div>
+                    <div class="character-option" data-char="🐰">🐰</div>
+                    <div class="character-option" data-char="🐻">🐻</div>
+                    <div class="character-option" data-char="🐨">🐨</div>
+                    <div class="character-option" data-char="🐵">🐵</div>
                 </div>
-                <div class="stats">
-                    <div>정답: <span id="correctCount">0</span>개 ✓</div>
-                    <div>총 문제: <span id="totalCount">0</span>개</div>
-                    <div style="color: #667eea; font-weight: bold; margin-top: 5px;">
-                        난이도별 점수: 1단계(2점) ~ 6단계(12점)<br>
-                        <small>1단계=1자리, 2단계=2자리, 3단계=3자리...</small>
+            </div>
+
+            <div class="difficulty-selection">
+                <div class="section-title">⭐ 난이도를 선택하세요</div>
+                <div class="difficulty-grid">
+                    <div class="difficulty-option" data-difficulty="1">
+                        ⭐ 1단계<br><small>1자리 수 (1~9)</small>
+                    </div>
+                    <div class="difficulty-option" data-difficulty="2">
+                        ⭐⭐ 2단계<br><small>2자리 수 (10~99)</small>
+                    </div>
+                    <div class="difficulty-option" data-difficulty="3">
+                        ⭐⭐⭐ 3단계<br><small>3자리 수 (100~999)</small>
+                    </div>
+                    <div class="difficulty-option" data-difficulty="4">
+                        ⭐⭐⭐⭐ 4단계<br><small>4자리 수 (1000~9999)</small>
+                    </div>
+                    <div class="difficulty-option" data-difficulty="5">
+                        ⭐⭐⭐⭐⭐ 5단계<br><small>5자리 수 (10000~99999)</small>
+                    </div>
+                    <div class="difficulty-option" data-difficulty="6">
+                        ⭐⭐⭐⭐⭐⭐ 6단계<br><small>6자리 수 (100000~999999)</small>
                     </div>
                 </div>
             </div>
+
+            <button class="start-btn" id="startGameBtn" disabled>게임 시작!</button>
         </div>
-        
-        <div class="problem-type-selector">
-            <button class="type-btn active" onclick="selectType('all')">전체 랜덤</button>
-            <button class="type-btn" onclick="selectType('addition')">➕ 덧셈</button>
-            <button class="type-btn" onclick="selectType('subtraction')">➖ 뺄셈</button>
-            <button class="type-btn" onclick="selectType('multiplication')">✖️ 곱셈</button>
-            <button class="type-btn" onclick="selectType('division')">➗ 나눗셈</button>
-            <button class="type-btn" onclick="selectType('word')">📝 서술형</button>
-        </div>
-        
-        <div class="problem-container">
-            <div class="drawing-controls">
-                <button class="drawing-btn" onclick="toggleDrawing()" id="drawingToggle">🖊️ 그림판 켜기</button>
-                <button class="color-btn" onclick="changeColor('#000000')" style="background: #000000;" id="color-black"></button>
-                <button class="color-btn" onclick="changeColor('#ff0000')" style="background: #ff0000;"></button>
-                <button class="color-btn" onclick="changeColor('#0000ff')" style="background: #0000ff;"></button>
-                <button class="color-btn" onclick="changeColor('#00ff00')" style="background: #00ff00;"></button>
-                <button class="color-btn" onclick="changeColor('#ff00ff')" style="background: #ff00ff;"></button>
-                <button class="drawing-btn" onclick="changeLineWidth(2)">가는 선</button>
-                <button class="drawing-btn" onclick="changeLineWidth(5)">중간 선</button>
-                <button class="drawing-btn" onclick="changeLineWidth(10)">굵은 선</button>
-                <button class="drawing-btn" onclick="useEraser()">지우개</button>
-                <button class="drawing-btn" onclick="clearCanvas()">전체 지우기</button>
+
+        <!-- 게임 화면 -->
+        <div class="game-screen" id="gameScreen">
+            <button class="restart-btn" onclick="restartGame()">🔄 처음으로</button>
+
+            <div class="header">
+                <h1>🎮 수학 레벨업 게임</h1>
             </div>
-            
-            <div class="format-selector" id="formatSelector" style="display: none;">
-                <button class="format-btn active" onclick="changeFormat('inline')">일자형</button>
-                <button class="format-btn" onclick="changeFormat('vertical')">두줄형</button>
+
+            <div class="difficulty-selector">
+                <button class="difficulty-btn" onclick="selectDifficulty(1)">⭐ 1단계</button>
+                <button class="difficulty-btn" onclick="selectDifficulty(2)">⭐⭐ 2단계</button>
+                <button class="difficulty-btn" onclick="selectDifficulty(3)">⭐⭐⭐ 3단계</button>
+                <button class="difficulty-btn" onclick="selectDifficulty(4)">⭐⭐⭐⭐ 4단계</button>
+                <button class="difficulty-btn" onclick="selectDifficulty(5)">⭐⭐⭐⭐⭐ 5단계</button>
+                <button class="difficulty-btn" onclick="selectDifficulty(6)">⭐⭐⭐⭐⭐⭐ 6단계</button>
             </div>
-            
-            <div class="canvas-container">
-                <canvas id="drawingCanvas"></canvas>
-                <canvas id="problemCanvas"></canvas>
-            </div>
-            
-            <div class="answer-section">
-                <div class="answer-display" id="answerDisplay">답: </div>
-                <div class="number-pad">
-                    <div class="number-row">
-                        <button class="num-btn" onclick="addNumber(1)">1</button>
-                        <button class="num-btn" onclick="addNumber(2)">2</button>
-                        <button class="num-btn" onclick="addNumber(3)">3</button>
-                        <button class="num-btn" onclick="addNumber(4)">4</button>
-                        <button class="num-btn" onclick="addNumber(5)">5</button>
+
+            <div class="character-section">
+                <div class="character" id="character">🐱</div>
+                <div class="character-info">
+                    <div class="level" id="level">Level 1</div>
+                    <div class="exp-bar">
+                        <div class="exp-fill" id="expFill">0 / 20</div>
                     </div>
-                    <div class="number-row">
-                        <button class="num-btn" onclick="addNumber(6)">6</button>
-                        <button class="num-btn" onclick="addNumber(7)">7</button>
-                        <button class="num-btn" onclick="addNumber(8)">8</button>
-                        <button class="num-btn" onclick="addNumber(9)">9</button>
-                        <button class="num-btn" onclick="addNumber(0)">0</button>
-                        <button class="num-btn btn-clear" onclick="clearAnswer()">←</button>
+                    <div class="stats">
+                        <div>정답: <span id="correctCount">0</span>개 ✓</div>
+                        <div>총 문제: <span id="totalCount">0</span>개</div>
+                        <div style="color: #667eea; font-weight: bold; margin-top: 5px; font-size: 0.9em;">
+                            난이도별 점수: 1단계(2점) ~ 6단계(12점)
+                        </div>
                     </div>
                 </div>
-                <button class="btn-submit" onclick="checkAnswer()">제출하기</button>
+            </div>
+
+            <div class="problem-type-selector">
+                <button class="type-btn active" onclick="selectType('all')">전체 랜덤</button>
+                <button class="type-btn" onclick="selectType('addition')">➕ 덧셈</button>
+                <button class="type-btn" onclick="selectType('subtraction')">➖ 뺄셈</button>
+                <button class="type-btn" onclick="selectType('multiplication')">✖️ 곱셈</button>
+                <button class="type-btn" onclick="selectType('division')">➗ 나눗셈</button>
+                <button class="type-btn" onclick="selectType('word')">📝 서술형</button>
+            </div>
+
+            <div class="problem-container">
+                <div class="drawing-controls">
+                    <button class="drawing-btn" onclick="toggleDrawing()" id="drawingToggle">🖊️ 그림판 켜기</button>
+                    <button class="color-btn" onclick="changeColor('#000000')" style="background: #000000;" id="color-black"></button>
+                    <button class="color-btn" onclick="changeColor('#ff0000')" style="background: #ff0000;"></button>
+                    <button class="color-btn" onclick="changeColor('#0000ff')" style="background: #0000ff;"></button>
+                    <button class="color-btn" onclick="changeColor('#00ff00')" style="background: #00ff00;"></button>
+                    <button class="color-btn" onclick="changeColor('#ff00ff')" style="background: #ff00ff;"></button>
+                    <button class="drawing-btn" onclick="changeLineWidth(2)">가는 선</button>
+                    <button class="drawing-btn" onclick="changeLineWidth(5)">중간 선</button>
+                    <button class="drawing-btn" onclick="changeLineWidth(10)">굵은 선</button>
+                    <button class="drawing-btn" onclick="useEraser()">지우개</button>
+                    <button class="drawing-btn" onclick="clearCanvas()">전체 지우기</button>
+                </div>
+
+                <div class="format-selector" id="formatSelector" style="display: none;">
+                    <button class="format-btn active" onclick="changeFormat('inline')">일자형</button>
+                    <button class="format-btn" onclick="changeFormat('vertical')">두줄형</button>
+                </div>
+
+                <div class="canvas-container">
+                    <canvas id="drawingCanvas"></canvas>
+                    <canvas id="problemCanvas"></canvas>
+                </div>
+
+                <div class="answer-section">
+                    <div class="answer-display" id="answerDisplay">답: </div>
+                    <div class="number-pad">
+                        <div class="number-row">
+                            <button class="num-btn" onclick="addNumber(1)">1</button>
+                            <button class="num-btn" onclick="addNumber(2)">2</button>
+                            <button class="num-btn" onclick="addNumber(3)">3</button>
+                            <button class="num-btn" onclick="addNumber(4)">4</button>
+                            <button class="num-btn" onclick="addNumber(5)">5</button>
+                        </div>
+                        <div class="number-row">
+                            <button class="num-btn" onclick="addNumber(6)">6</button>
+                            <button class="num-btn" onclick="addNumber(7)">7</button>
+                            <button class="num-btn" onclick="addNumber(8)">8</button>
+                            <button class="num-btn" onclick="addNumber(9)">9</button>
+                            <button class="num-btn" onclick="addNumber(0)">0</button>
+                            <button class="num-btn btn-clear" onclick="clearAnswer()">←</button>
+                        </div>
+                    </div>
+                    <button class="btn-submit" onclick="checkAnswer()">제출하기</button>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <div class="overlay" id="overlay"></div>
     <div class="result-popup" id="resultPopup">
         <div class="result-icon" id="resultIcon"></div>
@@ -599,7 +896,7 @@
         <div id="expGain"></div>
         <button class="btn-next" onclick="nextProblem()">다음 문제</button>
     </div>
-    
+
     <script>
         let currentType = 'all';
         let currentProblem = null;
@@ -611,61 +908,156 @@
         let expNeeded = 20;
         let correctCount = 0;
         let totalCount = 0;
-        
+        let selectedCharacter = null;
+        let selectedDifficulty = null;
+        let initialCharacter = '🐱';
+
         // 그림판 관련 변수
         let drawingCanvas, problemCanvas;
         let drawingCtx, problemCtx;
         let isDrawing = false;
-        let drawingEnabled = true; // 기본값을 true로 변경
+        let drawingEnabled = false;
         let currentColor = '#000000';
         let currentLineWidth = 3;
         let lastX = 0;
         let lastY = 0;
-        
+
         const characters = ['🐱', '🐶', '🐼', '🦁', '🐯', '🦊', '🐰', '🐻', '🐨', '🐵'];
-        
+
+        // 시작 화면 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initStartScreen();
+        });
+
+        function initStartScreen() {
+            // 캐릭터 선택 이벤트
+            document.querySelectorAll('.character-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.character-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedCharacter = this.dataset.char;
+                    checkStartReady();
+                });
+            });
+
+            // 난이도 선택 이벤트
+            document.querySelectorAll('.difficulty-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.difficulty-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedDifficulty = parseInt(this.dataset.difficulty);
+                    checkStartReady();
+                });
+            });
+
+            // 게임 시작 버튼
+            document.getElementById('startGameBtn').addEventListener('click', startGame);
+        }
+
+        function checkStartReady() {
+            const startBtn = document.getElementById('startGameBtn');
+            if (selectedCharacter && selectedDifficulty) {
+                startBtn.disabled = false;
+            }
+        }
+
+        function startGame() {
+            // 초기 설정
+            initialCharacter = selectedCharacter;
+            currentDifficulty = selectedDifficulty;
+
+            // 화면 전환
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.add('active');
+
+            // 난이도 버튼 활성화
+            document.querySelectorAll('.difficulty-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === currentDifficulty - 1) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // 캐릭터 설정
+            document.getElementById('character').textContent = initialCharacter;
+
+            // 캔버스 초기화 및 첫 문제 생성
+            initCanvas();
+            generateProblem();
+        }
+
+        function restartGame() {
+            // 게임 상태 초기화
+            level = 1;
+            exp = 0;
+            expNeeded = 20;
+            correctCount = 0;
+            totalCount = 0;
+            selectedCharacter = null;
+            selectedDifficulty = null;
+
+            // UI 초기화
+            document.getElementById('level').textContent = 'Level 1';
+            document.getElementById('expFill').textContent = '0 / 20';
+            document.getElementById('expFill').style.width = '0%';
+            document.getElementById('correctCount').textContent = '0';
+            document.getElementById('totalCount').textContent = '0';
+
+            // 선택 초기화
+            document.querySelectorAll('.character-option').forEach(o => o.classList.remove('selected'));
+            document.querySelectorAll('.difficulty-option').forEach(o => o.classList.remove('selected'));
+            document.getElementById('startGameBtn').disabled = true;
+
+            // 화면 전환
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }
+
         function random(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-        
+
         // 캔버스 초기화
         function initCanvas() {
             drawingCanvas = document.getElementById('drawingCanvas');
             problemCanvas = document.getElementById('problemCanvas');
             drawingCtx = drawingCanvas.getContext('2d');
             problemCtx = problemCanvas.getContext('2d');
-            
-            const container = drawingCanvas.parentElement;
-            const width = container.offsetWidth;
-            const height = container.offsetHeight;
-            
-            drawingCanvas.width = width;
-            drawingCanvas.height = height;
-            problemCanvas.width = width;
-            problemCanvas.height = height;
-            
-            // 그림판 캔버스를 투명하게 초기화
-            drawingCtx.clearRect(0, 0, width, height);
-            
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
             // 그림판 이벤트 리스너
             drawingCanvas.addEventListener('mousedown', startDrawing);
             drawingCanvas.addEventListener('mousemove', draw);
             drawingCanvas.addEventListener('mouseup', stopDrawing);
             drawingCanvas.addEventListener('mouseout', stopDrawing);
-            
+
             // 터치 이벤트
             drawingCanvas.addEventListener('touchstart', handleTouch);
             drawingCanvas.addEventListener('touchmove', handleTouch);
             drawingCanvas.addEventListener('touchend', stopDrawing);
-            
+
             document.getElementById('color-black').classList.add('active');
-            
-            // 그림판 버튼 초기 상태 설정
-            const drawingToggle = document.getElementById('drawingToggle');
-            drawingToggle.textContent = '🖊️ 그림판 끄기';
-            drawingToggle.classList.add('active');
         }
-        
+
+        function resizeCanvas() {
+            const container = drawingCanvas.parentElement;
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+
+            drawingCanvas.width = width;
+            drawingCanvas.height = height;
+            problemCanvas.width = width;
+            problemCanvas.height = height;
+
+            drawingCtx.clearRect(0, 0, width, height);
+
+            if (currentProblem) {
+                displayProblem();
+            }
+        }
+
         function toggleDrawing() {
             drawingEnabled = !drawingEnabled;
             const btn = document.getElementById('drawingToggle');
@@ -677,7 +1069,7 @@
                 btn.classList.remove('active');
             }
         }
-        
+
         function startDrawing(e) {
             if (!drawingEnabled) return;
             isDrawing = true;
@@ -685,14 +1077,14 @@
             lastX = e.clientX - rect.left;
             lastY = e.clientY - rect.top;
         }
-        
+
         function draw(e) {
             if (!isDrawing || !drawingEnabled) return;
-            
+
             const rect = drawingCanvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             drawingCtx.beginPath();
             drawingCtx.moveTo(lastX, lastY);
             drawingCtx.lineTo(x, y);
@@ -700,24 +1092,24 @@
             drawingCtx.lineWidth = currentLineWidth;
             drawingCtx.lineCap = 'round';
             drawingCtx.stroke();
-            
+
             lastX = x;
             lastY = y;
         }
-        
+
         function stopDrawing() {
             isDrawing = false;
         }
-        
+
         function handleTouch(e) {
             e.preventDefault();
             if (!drawingEnabled) return;
-            
+
             const touch = e.touches[0];
             const rect = drawingCanvas.getBoundingClientRect();
             const x = touch.clientX - rect.left;
             const y = touch.clientY - rect.top;
-            
+
             if (e.type === 'touchstart') {
                 isDrawing = true;
                 lastX = x;
@@ -730,38 +1122,38 @@
                 drawingCtx.lineWidth = currentLineWidth;
                 drawingCtx.lineCap = 'round';
                 drawingCtx.stroke();
-                
+
                 lastX = x;
                 lastY = y;
             }
         }
-        
+
         function changeColor(color) {
             currentColor = color;
             document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
-        
+
         function changeLineWidth(width) {
             currentLineWidth = width;
         }
-        
+
         function useEraser() {
             currentColor = '#ffffff';
             currentLineWidth = 20;
         }
-        
+
         function clearCanvas() {
             drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
         }
-        
+
         function selectDifficulty(difficulty) {
             currentDifficulty = difficulty;
             document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             generateProblem();
         }
-        
+
         function selectType(type) {
             currentType = type;
             currentFormat = 'inline';
@@ -769,34 +1161,35 @@
             event.target.classList.add('active');
             generateProblem();
         }
-        
+
         function changeFormat(format) {
             currentFormat = format;
             document.querySelectorAll('.format-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             displayProblem();
         }
-        
+
         function addNumber(num) {
             currentAnswer += num.toString();
             document.getElementById('answerDisplay').textContent = '답: ' + currentAnswer;
         }
-        
+
         function clearAnswer() {
             currentAnswer = currentAnswer.slice(0, -1);
             document.getElementById('answerDisplay').textContent = '답: ' + (currentAnswer || '');
         }
-        
+
         function generateProblem() {
             currentAnswer = '';
             document.getElementById('answerDisplay').textContent = '답: ';
-            
+            clearCanvas();
+
             const types = currentType === 'all' 
                 ? ['addition', 'subtraction', 'multiplication', 'division', 'word']
                 : [currentType];
-            
+
             const selectedType = types[random(0, types.length - 1)];
-            
+
             if (selectedType === 'addition') {
                 currentProblem = generateAddition();
             } else if (selectedType === 'subtraction') {
@@ -808,19 +1201,19 @@
             } else {
                 currentProblem = generateWordProblem();
             }
-            
+
             displayProblem();
         }
-        
+
         function generateAddition() {
             let min, max;
             switch(currentDifficulty) {
-                case 1: min = 1; max = 9; break;        // 1자리수
-                case 2: min = 10; max = 99; break;      // 2자리수
-                case 3: min = 100; max = 999; break;    // 3자리수
-                case 4: min = 1000; max = 9999; break;  // 4자리수
-                case 5: min = 10000; max = 99999; break; // 5자리수
-                case 6: min = 100000; max = 999999; break; // 6자리수
+                case 1: min = 1; max = 9; break;
+                case 2: min = 10; max = 99; break;
+                case 3: min = 100; max = 999; break;
+                case 4: min = 1000; max = 9999; break;
+                case 5: min = 10000; max = 99999; break;
+                case 6: min = 100000; max = 999999; break;
             }
             const a = random(min, max);
             const b = random(min, max);
@@ -831,16 +1224,16 @@
                 canToggleFormat: true
             };
         }
-        
+
         function generateSubtraction() {
             let min, max;
             switch(currentDifficulty) {
-                case 1: min = 1; max = 9; break;        // 1자리수
-                case 2: min = 10; max = 99; break;      // 2자리수
-                case 3: min = 100; max = 999; break;    // 3자리수
-                case 4: min = 1000; max = 9999; break;  // 4자리수
-                case 5: min = 10000; max = 99999; break; // 5자리수
-                case 6: min = 100000; max = 999999; break; // 6자리수
+                case 1: min = 1; max = 9; break;
+                case 2: min = 10; max = 99; break;
+                case 3: min = 100; max = 999; break;
+                case 4: min = 1000; max = 9999; break;
+                case 5: min = 10000; max = 99999; break;
+                case 6: min = 100000; max = 999999; break;
             }
             const a = random(min, max);
             const b = random(Math.floor(min/2), a - 1);
@@ -851,16 +1244,16 @@
                 canToggleFormat: true
             };
         }
-        
+
         function generateMultiplication() {
             let minA, maxA, minB, maxB;
             switch(currentDifficulty) {
-                case 1: minA = 1; maxA = 9; minB = 1; maxB = 9; break;          // 1자리 × 1자리
-                case 2: minA = 10; maxA = 99; minB = 1; maxB = 9; break;        // 2자리 × 1자리
-                case 3: minA = 10; maxA = 99; minB = 10; maxB = 99; break;      // 2자리 × 2자리
-                case 4: minA = 100; maxA = 999; minB = 10; maxB = 99; break;    // 3자리 × 2자리
-                case 5: minA = 100; maxA = 999; minB = 100; maxB = 999; break;  // 3자리 × 3자리
-                case 6: minA = 1000; maxA = 9999; minB = 100; maxB = 999; break; // 4자리 × 3자리
+                case 1: minA = 1; maxA = 9; minB = 1; maxB = 9; break;
+                case 2: minA = 10; maxA = 99; minB = 1; maxB = 9; break;
+                case 3: minA = 10; maxA = 99; minB = 10; maxB = 99; break;
+                case 4: minA = 100; maxA = 999; minB = 10; maxB = 99; break;
+                case 5: minA = 100; maxA = 999; minB = 100; maxB = 999; break;
+                case 6: minA = 1000; maxA = 9999; minB = 100; maxB = 999; break;
             }
             const a = random(minA, maxA);
             const b = random(minB, maxB);
@@ -871,16 +1264,16 @@
                 canToggleFormat: true
             };
         }
-        
+
         function generateDivision() {
             let minDiv, maxDiv, minQuot, maxQuot;
             switch(currentDifficulty) {
-                case 1: minDiv = 1; maxDiv = 9; minQuot = 1; maxQuot = 9; break;       // 1자리
-                case 2: minDiv = 1; maxDiv = 9; minQuot = 10; maxQuot = 99; break;     // 2자리 ÷ 1자리
-                case 3: minDiv = 10; maxDiv = 99; minQuot = 10; maxQuot = 99; break;   // 3자리 ÷ 2자리
-                case 4: minDiv = 10; maxDiv = 99; minQuot = 100; maxQuot = 999; break; // 4자리 ÷ 2자리
-                case 5: minDiv = 100; maxDiv = 999; minQuot = 100; maxQuot = 999; break; // 5자리 ÷ 3자리
-                case 6: minDiv = 100; maxDiv = 999; minQuot = 1000; maxQuot = 9999; break; // 6자리 ÷ 3자리
+                case 1: minDiv = 1; maxDiv = 9; minQuot = 1; maxQuot = 9; break;
+                case 2: minDiv = 1; maxDiv = 9; minQuot = 10; maxQuot = 99; break;
+                case 3: minDiv = 10; maxDiv = 99; minQuot = 10; maxQuot = 99; break;
+                case 4: minDiv = 10; maxDiv = 99; minQuot = 100; maxQuot = 999; break;
+                case 5: minDiv = 100; maxDiv = 999; minQuot = 100; maxQuot = 999; break;
+                case 6: minDiv = 100; maxDiv = 999; minQuot = 1000; maxQuot = 9999; break;
             }
             const divisor = random(minDiv, maxDiv);
             const quotient = random(minQuot, maxQuot);
@@ -892,21 +1285,21 @@
                 canToggleFormat: false
             };
         }
-        
+
         function generateWordProblem() {
             const type = random(1, 4);
             let problem, answer;
             let min, max;
-            
+
             switch(currentDifficulty) {
-                case 1: min = 1; max = 9; break;        // 1자리수
-                case 2: min = 10; max = 99; break;      // 2자리수
-                case 3: min = 100; max = 999; break;    // 3자리수
-                case 4: min = 1000; max = 9999; break;  // 4자리수
-                case 5: min = 10000; max = 99999; break; // 5자리수
-                case 6: min = 100000; max = 999999; break; // 6자리수
+                case 1: min = 1; max = 9; break;
+                case 2: min = 10; max = 99; break;
+                case 3: min = 100; max = 999; break;
+                case 4: min = 1000; max = 9999; break;
+                case 5: min = 10000; max = 99999; break;
+                case 6: min = 100000; max = 999999; break;
             }
-            
+
             if (type === 1) {
                 const a = random(min, max);
                 const b = random(min, max);
@@ -961,7 +1354,7 @@
                 answer = quotient;
                 problem = `과자 ${dividend}개를 ${divisor}명의 친구들에게 똑같이 나누어 주려고 합니다. 한 명이 받을 수 있는 과자는 몇 개입니까?`;
             }
-            
+
             return {
                 type: 'word_problem',
                 problem,
@@ -969,51 +1362,64 @@
                 canToggleFormat: false
             };
         }
-        
+
         function displayProblem() {
-            // 문제 캔버스 초기화
             problemCtx.clearRect(0, 0, problemCanvas.width, problemCanvas.height);
-            
+
             const prob = currentProblem;
             const centerX = problemCanvas.width / 2;
             const centerY = problemCanvas.height / 2;
-            
-            // 형식 선택 버튼 표시/숨김
+
             const formatSelector = document.getElementById('formatSelector');
             if (prob.canToggleFormat) {
                 formatSelector.style.display = 'block';
             } else {
                 formatSelector.style.display = 'none';
             }
-            
-            // 숫자 길이에 따라 폰트 크기 조정
+
             let fontSize = 48;
             const maxNum = Math.max(prob.a || 0, prob.b || 0, prob.dividend || 0, prob.divisor || 0);
-            if (maxNum > 9999) fontSize = 32;
-            else if (maxNum > 999) fontSize = 38;
-            else if (maxNum > 99) fontSize = 42;
-            
+
+            // 모바일 화면 크기에 따른 폰트 조정
+            if (window.innerWidth <= 480) {
+                if (maxNum > 9999) fontSize = 24;
+                else if (maxNum > 999) fontSize = 28;
+                else if (maxNum > 99) fontSize = 32;
+                else fontSize = 36;
+            } else if (window.innerWidth <= 768) {
+                if (maxNum > 9999) fontSize = 28;
+                else if (maxNum > 999) fontSize = 34;
+                else if (maxNum > 99) fontSize = 38;
+                else fontSize = 42;
+            } else {
+                if (maxNum > 9999) fontSize = 32;
+                else if (maxNum > 999) fontSize = 38;
+                else if (maxNum > 99) fontSize = 42;
+            }
+
             problemCtx.font = `bold ${fontSize}px Arial`;
             problemCtx.fillStyle = '#2d3748';
             problemCtx.textAlign = 'center';
             problemCtx.textBaseline = 'middle';
-            
+
             if (prob.type === 'addition') {
                 if (currentFormat === 'inline') {
                     const text = `${prob.a} + ${prob.b} = ?`;
                     problemCtx.fillText(text, centerX, centerY);
                 } else {
                     problemCtx.textAlign = 'right';
-                    const offsetX = centerX + 100;
-                    problemCtx.fillText(String(prob.a), offsetX, centerY - 40);
+                    const offsetX = centerX + (window.innerWidth <= 480 ? 60 : 100);
+                    const spacing = window.innerWidth <= 480 ? 30 : 40;
+                    problemCtx.fillText(String(prob.a), offsetX, centerY - spacing);
                     problemCtx.fillText(`+ ${prob.b}`, offsetX, centerY);
                     problemCtx.beginPath();
-                    problemCtx.moveTo(centerX - 100, centerY + 20);
-                    problemCtx.lineTo(centerX + 150, centerY + 20);
+                    const lineWidth = window.innerWidth <= 480 ? 150 : 200;
+                    problemCtx.moveTo(centerX - 50, centerY + 20);
+                    problemCtx.lineTo(centerX + lineWidth - 50, centerY + 20);
                     problemCtx.strokeStyle = '#2d3748';
                     problemCtx.lineWidth = 3;
                     problemCtx.stroke();
-                    problemCtx.fillText('?', offsetX, centerY + 60);
+                    problemCtx.fillText('?', offsetX, centerY + spacing + 20);
                 }
             } else if (prob.type === 'subtraction') {
                 if (currentFormat === 'inline') {
@@ -1021,16 +1427,18 @@
                     problemCtx.fillText(text, centerX, centerY);
                 } else {
                     problemCtx.textAlign = 'right';
-                    const offsetX = centerX + 100;
-                    problemCtx.fillText(String(prob.a), offsetX, centerY - 40);
+                    const offsetX = centerX + (window.innerWidth <= 480 ? 60 : 100);
+                    const spacing = window.innerWidth <= 480 ? 30 : 40;
+                    problemCtx.fillText(String(prob.a), offsetX, centerY - spacing);
                     problemCtx.fillText(`- ${prob.b}`, offsetX, centerY);
                     problemCtx.beginPath();
-                    problemCtx.moveTo(centerX - 100, centerY + 20);
-                    problemCtx.lineTo(centerX + 150, centerY + 20);
+                    const lineWidth = window.innerWidth <= 480 ? 150 : 200;
+                    problemCtx.moveTo(centerX - 50, centerY + 20);
+                    problemCtx.lineTo(centerX + lineWidth - 50, centerY + 20);
                     problemCtx.strokeStyle = '#2d3748';
                     problemCtx.lineWidth = 3;
                     problemCtx.stroke();
-                    problemCtx.fillText('?', offsetX, centerY + 60);
+                    problemCtx.fillText('?', offsetX, centerY + spacing + 20);
                 }
             } else if (prob.type === 'multiplication') {
                 if (currentFormat === 'inline') {
@@ -1038,67 +1446,67 @@
                     problemCtx.fillText(text, centerX, centerY);
                 } else {
                     problemCtx.textAlign = 'right';
-                    const offsetX = centerX + 100;
-                    problemCtx.fillText(String(prob.a), offsetX, centerY - 40);
+                    const offsetX = centerX + (window.innerWidth <= 480 ? 60 : 100);
+                    const spacing = window.innerWidth <= 480 ? 30 : 40;
+                    problemCtx.fillText(String(prob.a), offsetX, centerY - spacing);
                     problemCtx.fillText(`× ${prob.b}`, offsetX, centerY);
                     problemCtx.beginPath();
-                    problemCtx.moveTo(centerX - 100, centerY + 20);
-                    problemCtx.lineTo(centerX + 150, centerY + 20);
+                    const lineWidth = window.innerWidth <= 480 ? 150 : 200;
+                    problemCtx.moveTo(centerX - 50, centerY + 20);
+                    problemCtx.lineTo(centerX + lineWidth - 50, centerY + 20);
                     problemCtx.strokeStyle = '#2d3748';
                     problemCtx.lineWidth = 3;
                     problemCtx.stroke();
-                    problemCtx.fillText('?', offsetX, centerY + 60);
+                    problemCtx.fillText('?', offsetX, centerY + spacing + 20);
                 }
             } else if (prob.type === 'division') {
-                // 나눗셈은 폰트 크기 더 작게
-                if (maxNum > 9999) fontSize = 28;
-                else if (maxNum > 999) fontSize = 34;
+                if (maxNum > 9999) fontSize = window.innerWidth <= 480 ? 20 : 28;
+                else if (maxNum > 999) fontSize = window.innerWidth <= 480 ? 24 : 34;
                 problemCtx.font = `bold ${fontSize}px Arial`;
-                
+
                 problemCtx.textAlign = 'left';
-                
-                // 나누는 수 (왼쪽)
-                problemCtx.fillText(String(prob.divisor), centerX - 150, centerY + 15);
-                
-                // 나눗셈 기호 그리기
+                const leftOffset = window.innerWidth <= 480 ? 100 : 150;
+                problemCtx.fillText(String(prob.divisor), centerX - leftOffset, centerY + 15);
+
                 problemCtx.beginPath();
-                // 세로선
-                problemCtx.moveTo(centerX - 80, centerY - 60);
-                problemCtx.lineTo(centerX - 80, centerY + 60);
-                // 위쪽 가로선
-                problemCtx.moveTo(centerX - 80, centerY - 60);
-                problemCtx.lineTo(centerX + 150, centerY - 60);
+                const divHeight = window.innerWidth <= 480 ? 50 : 60;
+                const divWidth = window.innerWidth <= 480 ? 100 : 150;
+                problemCtx.moveTo(centerX - 80, centerY - divHeight);
+                problemCtx.lineTo(centerX - 80, centerY + divHeight);
+                problemCtx.moveTo(centerX - 80, centerY - divHeight);
+                problemCtx.lineTo(centerX + divWidth - 80, centerY - divHeight);
                 problemCtx.strokeStyle = '#2d3748';
                 problemCtx.lineWidth = 4;
                 problemCtx.stroke();
-                
-                // 나눠지는 수 (안쪽)
+
                 problemCtx.textAlign = 'center';
-                problemCtx.fillText(String(prob.dividend), centerX + 35, centerY + 15);
+                problemCtx.fillText(String(prob.dividend), centerX + 20, centerY + 15);
             } else if (prob.type === 'word_problem') {
-                problemCtx.font = 'bold 18px Arial';
+                const wordFontSize = window.innerWidth <= 480 ? 14 : (window.innerWidth <= 768 ? 16 : 18);
+                problemCtx.font = `bold ${wordFontSize}px Arial`;
                 problemCtx.textAlign = 'left';
                 const words = prob.problem;
-                const maxWidth = problemCanvas.width - 80;
+                const maxWidth = problemCanvas.width - (window.innerWidth <= 480 ? 40 : 80);
                 const lines = wrapText(problemCtx, words, maxWidth);
-                const lineHeight = 28;
+                const lineHeight = window.innerWidth <= 480 ? 22 : 28;
                 const startY = centerY - (lines.length * lineHeight) / 2;
-                
+                const leftPadding = window.innerWidth <= 480 ? 20 : 40;
+
                 lines.forEach((line, i) => {
-                    problemCtx.fillText(line, 40, startY + i * lineHeight);
+                    problemCtx.fillText(line, leftPadding, startY + i * lineHeight);
                 });
             }
         }
-        
+
         function wrapText(ctx, text, maxWidth) {
             const words = text.split('');
             const lines = [];
             let currentLine = '';
-            
+
             for (let i = 0; i < words.length; i++) {
                 const testLine = currentLine + words[i];
                 const metrics = ctx.measureText(testLine);
-                
+
                 if (metrics.width > maxWidth && currentLine !== '') {
                     lines.push(currentLine);
                     currentLine = words[i];
@@ -1109,100 +1517,79 @@
             lines.push(currentLine);
             return lines;
         }
-        
+
         function checkAnswer() {
-            const userAnswer = parseInt(currentAnswer);
-            
-            if (isNaN(userAnswer) || currentAnswer === '') {
+            if (currentAnswer === '') {
                 alert('답을 입력해주세요!');
                 return;
             }
-            
+
             totalCount++;
             document.getElementById('totalCount').textContent = totalCount;
-            
-            const isCorrect = userAnswer === currentProblem.answer;
-            
-            if (isCorrect) {
-                correctCount++;
-                document.getElementById('correctCount').textContent = correctCount;
-                
-                // 난이도에 따른 경험치 계산
-                let expGain = currentDifficulty * 2; // 1단계=2점, 2단계=4점, ..., 6단계=12점
-                
-                showResult(true, expGain);
-                gainExp(expGain);
-            } else {
-                showResult(false, 0);
-            }
-        }
-        
-        function showResult(isCorrect, expGain) {
-            const popup = document.getElementById('resultPopup');
+
+            const userAnswer = parseInt(currentAnswer);
+            const correctAnswer = currentProblem.answer;
+
             const overlay = document.getElementById('overlay');
+            const popup = document.getElementById('resultPopup');
             const icon = document.getElementById('resultIcon');
             const text = document.getElementById('resultText');
             const expGainDiv = document.getElementById('expGain');
-            
-            if (isCorrect) {
+
+            if (userAnswer === correctAnswer) {
+                correctCount++;
+                document.getElementById('correctCount').textContent = correctCount;
+
                 icon.textContent = '🎉';
                 text.textContent = '정답입니다!';
                 text.className = 'result-text result-correct';
-                expGainDiv.innerHTML = `<strong style="color: #48bb78; font-size: 1.3em;">+${expGain} 경험치!</strong><br><small style="color: #666;">(${currentDifficulty}단계 문제)</small>`;
+
+                const expGain = currentDifficulty * 2;
+                expGainDiv.innerHTML = `<div style="color: #00b894; font-size: 1.2em; margin: 10px 0;">+${expGain} EXP</div>`;
+
+                gainExp(expGain);
             } else {
                 icon.textContent = '😢';
                 text.textContent = '틀렸습니다!';
                 text.className = 'result-text result-incorrect';
-                expGainDiv.innerHTML = `<div style="color: #f56565; font-size: 1.2em;">정답: ${currentProblem.answer}</div>`;
+                expGainDiv.innerHTML = `<div style="color: #636e72; margin: 10px 0;">정답: ${correctAnswer}</div>`;
             }
-            
+
             overlay.classList.add('show');
             popup.classList.add('show');
         }
-        
+
         function gainExp(amount) {
             exp += amount;
-            
-            // 레벨업 체크 (20점마다 레벨업)
+
             while (exp >= expNeeded) {
+                levelUp();
                 exp -= expNeeded;
-                level++;
-                // 다음 레벨업에 필요한 경험치 고정 (20점)
                 expNeeded = 20;
-                
-                const charIndex = Math.min(level - 1, characters.length - 1);
-                document.getElementById('character').textContent = characters[charIndex];
             }
-            
-            updateDisplay();
+
+            updateExpBar();
         }
-        
-        function updateDisplay() {
+
+        function levelUp() {
+            level++;
             document.getElementById('level').textContent = `Level ${level}`;
-            const expFill = document.getElementById('expFill');
-            const percent = (exp / expNeeded) * 100;
-            expFill.style.width = percent + '%';
-            expFill.textContent = `${exp} / ${expNeeded}`;
+
+            const charIndex = (level - 1) % characters.length;
+            document.getElementById('character').textContent = characters[charIndex];
         }
-        
+
+        function updateExpBar() {
+            const percentage = (exp / expNeeded) * 100;
+            document.getElementById('expFill').style.width = percentage + '%';
+            document.getElementById('expFill').textContent = `${exp} / ${expNeeded}`;
+        }
+
         function nextProblem() {
             document.getElementById('overlay').classList.remove('show');
             document.getElementById('resultPopup').classList.remove('show');
-            currentFormat = 'inline';
-            document.querySelectorAll('.format-btn').forEach((btn, idx) => {
-                if (idx === 0) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-            clearCanvas();
             generateProblem();
         }
-        
-        // 페이지 로드 시 초기화
-        window.addEventListener('load', () => {
-            initCanvas();
-            generateProblem();
-            updateDisplay();
-        });
     </script>
 </body>
 </html>
